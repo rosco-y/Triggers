@@ -6,7 +6,7 @@ public class playerController : MonoBehaviour
 {
 
     Rigidbody playerRB;
-    public float speed = 5;
+    public float speed = 25;
 
     private void Awake()
     {
@@ -18,9 +18,11 @@ public class playerController : MonoBehaviour
         float moveH = Input.GetAxis("Horizontal");
         float moveV = Input.GetAxis("Vertical");
 
-        Vector3 move = new Vector3(moveH, 0, moveV);
-
-        playerRB.AddForce(move * Time.deltaTime * speed);
+        if (moveH != 0 || moveV != 0)
+        {
+            Vector3 move = new Vector3(moveH, 0, moveV);
+            playerRB.AddForce(move * Time.deltaTime * speed);
+        }
 
     }
 }
