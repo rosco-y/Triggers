@@ -6,16 +6,21 @@ public class doorOpener : MonoBehaviour
 {
     public Transform door;
     bool open = false;
-    public Vector3 openPosition;
-    public Vector3 closePosition;
+    Vector3 openPosition;
+    Vector3 closePosition;
     public float doorSpeed;
 
+    private void Awake()
+    {
+        closePosition = door.position;
+        openPosition = new Vector3(closePosition.x, closePosition.y + 1f, closePosition.z);
+    }
 
     private void Update()
     {
         if (open)
         {
-            door.position = Vector3.Lerp(door.position, openPosition, Time.deltaTime * doorSpeed); 
+            door.position = Vector3.Lerp(door.position, openPosition, Time.deltaTime * doorSpeed);
         }
         else
         {
@@ -25,11 +30,20 @@ public class doorOpener : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        open = true;
+        if (other.tag == "Player")
+        {
+            open = true;
+            print("Opening Door.");
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
     {
-        open = false;
+        if (other.tag == "Player")
+        {
+            open = false;
+            print("Closing Door.");
+        }
     }
 }

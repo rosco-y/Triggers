@@ -20,7 +20,7 @@ public class playerController : MonoBehaviour
 
         if (moveH != 0 || moveV != 0)
         {
-            Vector3 move = new Vector3(moveH, 0, moveV);
+            Vector3 move = new Vector3(moveH, 0, moveV); 
             playerRB.AddForce(move * Time.deltaTime * speed);
         }
 
